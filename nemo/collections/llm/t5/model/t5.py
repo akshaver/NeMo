@@ -60,7 +60,7 @@ def t5_data_step(dataloader_iter) -> Dict[str, torch.Tensor]:
 
     # bring to device
     for key in _batch.keys():
-        if key == "enc_dec_mask": # because enc_dec_mask is a tuple
+        if key == "enc_dec_mask":  # because enc_dec_mask is a tuple
             _batch[key] = (_batch[key][0].cuda(non_blocking=True), _batch[key][1].cuda(non_blocking=True))
         else:
             _batch[key] = _batch[key].cuda(non_blocking=True)
@@ -256,7 +256,6 @@ class T5Model(L.LightningModule, io.IOMixin, io.ConnectorMixin, fn.FNMixin):
 
         # DEBUGGING
         from megatron.core.models.T5.t5_model import T5Model as MCoreT5Model
-
 
         # This is to get the MCore model required in T5InferenceWrapper.
         mcore_model = self.module
