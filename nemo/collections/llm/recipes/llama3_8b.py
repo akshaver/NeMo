@@ -274,7 +274,7 @@ def finetune_recipe(
     elif peft_scheme.lower() == 'lora':
         recipe.peft = run.Config(LoRA)
         recipe.optim.config.lr = 1e-4
-        recipe.optim.config.use_distributed_optimizer=False
+        recipe.optim.config.use_distributed_optimizer = False
     else:
         raise ValueError(f"Unrecognized peft scheme: {peft_scheme}")
     return recipe
