@@ -30,7 +30,6 @@ def distributed_fused_adam_with_cosine_annealing(
     max_lr: float = 1e-4,
     min_lr: Optional[float] = None,
     clip_grad: float = 1.0,
-    use_distributed_optimizer: bool = True,
 ) -> run.Config[OptimizerModule]:
 
     opt_cfg = run.Config(
@@ -43,7 +42,7 @@ def distributed_fused_adam_with_cosine_annealing(
         adam_beta1=adam_beta1,
         adam_beta2=adam_beta2,
         adam_eps=1e-5,
-        use_distributed_optimizer=use_distributed_optimizer,
+        use_distributed_optimizer=True,
         clip_grad=clip_grad,
     )
 

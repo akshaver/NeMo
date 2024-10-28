@@ -289,6 +289,7 @@ def finetune_recipe(
         recipe.peft = run.Config(LoRA)
         recipe.trainer.strategy.tensor_model_parallel_size = 8
         recipe.optim.config.lr = 1e-4
+        recipe.optim.config.use_distributed_optimizer=False
     else:
         raise ValueError(f"Unrecognized peft scheme: {peft_scheme}")
     return recipe
