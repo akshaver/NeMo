@@ -2,11 +2,11 @@ import nemo_run as run
 import pytest
 
 from nemo.collections.llm.api import finetune, pretrain
-from nemo.collections.llm.t5.model.t5 import T5Config3B, T5Model
+from nemo.collections.llm.peft.lora import LoRA
 from nemo.collections.llm.recipes import t5_3b
 from nemo.collections.llm.t5.data.mock import MockDataModule
 from nemo.collections.llm.t5.data.squad import SquadDataModule
-from nemo.collections.llm.peft.lora import LoRA
+from nemo.collections.llm.t5.model.t5 import T5Config3B, T5Model
 from nemo.lightning import Trainer
 
 
@@ -94,7 +94,8 @@ class TestT5_3B:
 
     def test_trainer_parallelism_options(self, recipe_module):
         trainer_config = recipe_module.trainer(
-            tensor_parallelism=2, pipeline_parallelism=2,
+            tensor_parallelism=2,
+            pipeline_parallelism=2,
         )
         assert trainer_config.strategy.tensor_model_parallel_size == 2
         assert trainer_config.strategy.pipeline_model_parallel_size == 2
