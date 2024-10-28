@@ -92,8 +92,13 @@ class PEFT(IOMixin, ABC, ModelTransform):
             nn.Module: The transformed model with PEFT applied.
         """
 
-        model.freeze()
-        model.walk(self.transform)
+        if len(model) > 1:
+            for model_chunk in model: 
+                model_chunk.freeze() 
+                model_chunk.walk(self.transform)
+        else:
+            model.freeze()
+            model.walk(self.transform)
 
         return model
 

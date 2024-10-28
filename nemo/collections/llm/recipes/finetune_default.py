@@ -72,7 +72,8 @@ def default_finetune_recipe(
         ),
         data=datamodule,
         log=llm.default_log(dir=dir, name=name, tensorboard_logger=tensorboard_logger(name=name)),
-        optim=distributed_fused_adam_with_cosine_annealing(max_lr=1e-4, min_lr=0, warmup_steps=50, adam_beta2=0.98),
+        optim=distributed_fused_adam_with_cosine_annealing(
+            max_lr=1e-4, min_lr=0, warmup_steps=50, adam_beta2=0.98, use_distributed_optimizer=False),
         resume=nemo_resume(resume_path),
     )
 
